@@ -1,63 +1,51 @@
 package burger_shop;
 
 public class HealthBurger extends Burger {
-  private String healthToppingName3;
-  private double healthToppingPrice3;
-
-  private String healthToppingName4;
-  private double healthToppingPrice4;
-
-  public void addHealthTopping3(String name, double price) {  //EXTRA 2 TOPPINGS ALLOWED FOR HEALTH BURGER TO MAKE 4 TOTAL
-    this.healthToppingName3 = name;
-    this.healthToppingPrice3 = price;
-
+  public boolean spinach,avocado, mushrooms, peppers;
+  public HealthBurger(String name,String bread, String meat,double burgerPrice){
+    super(name,bread,meat,burgerPrice);
+    spinach = false; //ONLY FOUR TOPPINGS ALLOWED FOR HEALTHY BURGER CLASS
+    avocado = false;   //ONLY FOUR TOPPINGS ALLOWED FOR HEALTHY BURGER CLASS
+    mushrooms = false; //ONLY FOUR TOPPINGS ALLOWED FOR HEALTHY BURGER CLASS
+    peppers = false;   //ONLY FOUR TOPPINGS ALLOWED FOR HEALTHY BURGER CLASS
   }
-
-  public void addHealthTopping4(String name, double price) { //EXTRA 2 TOPPINGS ALLOWED FOR HEALTH BURGER TO MAKE 4 TOTAL
-    this.healthToppingName4 = name;
-    this.healthToppingPrice4 = price;
-
+  public void addSpinach(){
+    spinach = true;
+  }
+  public void addAvocado(){
+    avocado = true;
+  }
+  public void addMushrooms(){
+    mushrooms = true;
+  }
+  public void addPeppers(){
+    peppers = true;
+  }
+  public void removeSpinach(){
+    spinach = false;
+  }
+  public void removeAvocado(){
+    avocado = false;
+  }
+  public void removeMushrooms(){
+    mushrooms = false;
+  }
+  public void removePeppers(){
+    peppers = false;
   }
 
   @Override
-  public void addSoda(String name, String size, double price) {
-    System.out.println("Cannot add a soda to the Health Burger. Have some water instead!");
-  }
-
-  @Override
-  public void addFries(String size, double price) {
-    System.out.println("Cannot add fries to the Health Burger. Maybe try some carrot sticks?");
-  }
-
-  @Override
-  public void addBacon(String name, double price) {
-    System.out.println("Bacon on a Health Burger? Nope, try again!");
-  }
-
-  @Override
-  public void addCheese(String name, double price) {
-    System.out.println("Cheese on a Health Burger? Nope, try again!");
+  public double burgerPrice(){
+    return super.burgerPrice() + ((spinach?1d:0d) *.5d) + ((avocado?1d:0d) *1d) + ((mushrooms?1d:0d) *.75d) + ((peppers?1d:0d) *.60d);
   }
 
 
-
-  @Override
-  public double itemizedBurger() {
-    double totalBurgerPrice = super.itemizedBurger();
-    if(this.healthToppingName3 != null) {
-      totalBurgerPrice += this.healthToppingPrice3;
-      System.out.println("Added " + this.healthToppingName3 + " for an extra " + this.healthToppingPrice3);
-    }
-
-    if(this.healthToppingName4 != null) {
-      totalBurgerPrice += this.healthToppingPrice4;
-      System.out.println("Added " + this.healthToppingName4 + " for an extra " + this.healthToppingPrice4);
-    }
-    return totalBurgerPrice;
+  public void variableToppings(){
+    if(addToppings("Baby Spinach"))addSpinach();else removeSpinach();
+    if(addToppings("Avocado slices"))addAvocado();else removeAvocado();
+    if(addToppings("Portobello Mushrooms"))addMushrooms();else removeMushrooms();
+    if(addToppings("Chopped Red & Green Peppers"))addPeppers();else removePeppers();
   }
 
-  public HealthBurger(String meat, double price) {
-    super("Health", meat, price, "Brown Rye");
-  }
 }
 

@@ -1,109 +1,63 @@
 package burger_shop;
 
+import java.util.Scanner;
+
 public class Burger {
   private String name;
-  private String meat;
-  private double price;
-  private String breadRollType;
+  private String bread,meat;
+  private double burgerPrice;
+  private boolean cheese,mayo;
 
-  private String addToppingName1;
-  private double addToppingPrice1;
-
-  private String addToppingName2;
-  private double addToppingPrice2;
-
-  private String addCheeseName;
-  private double addCheesePrice;
-
-  private String addBaconName;
-  private double addBaconPrice;
-
-  private String addFriesSize;
-  private double addFriesPrice;
-
-  private String addSodaName;
-  private String addSodaSize;
-  private double addSodaPrice;
-
-  public Burger(String name, String meat, double price, String breadRollType) {
+  public Burger(String name,String bread,String meat,double burgerPrice){
     this.name = name;
+    this.bread = bread;
     this.meat = meat;
-    this.price = price;
-    this.breadRollType = breadRollType;
+    this.burgerPrice = burgerPrice;
+    this.cheese = false; //ONLY TWO TOPPINGS ALLOWED FOR PLAIN BURGER CLASS
+    this.mayo = false;   //ONLY TWO TOPPINGS ALLOWED FOR PLAIN BURGER CLASS
+  }
+  
+  public void addMayo(){
+    mayo = true;
+  }
+  public void addCheese(){
+    cheese = true;
   }
 
-  public void burgerAddTopping1(String name, double price) { //ONLY 2 TOPICS ALLOWED FOR PLAIN BURGER
-    this.addToppingName1 = name;
-    this.addToppingPrice1 = price;
-
+  public void removeMayo(){
+    mayo = false;
+  }
+  public void removeCheese(){
+    cheese = false;
   }
 
-  public void burgerAddTopping2(String name, double price) { //ONLY 2 TOPICS ALLOWED FOR PLAIN BURGER
-    this.addToppingName2 = name;
-    this.addToppingPrice2 = price;
-
+  public double burgerPrice(){ //calculating total burger price with toppings
+    return burgerPrice + (cheese?1:0) * .5d + (mayo?1:0) * .25d;
   }
 
-  public void addCheese(String name, double price) {
-    this.addCheeseName = name;
-    this.addCheesePrice = price;
-
+  public String getName(){
+    return  name;
   }
 
-  public void addBacon(String name, double price) {
-    this.addBaconName = name;
-    this.addBaconPrice = price;
+  public void variableToppings(){
+    if(addToppings("Cheese")){addCheese();}else removeCheese();
 
-  }
-
-  public void addFries(String size, double price) {
-    this.addFriesSize = size;
-    this.addFriesPrice = price;
-
-  }
-
-  public void addSoda(String name, String size, double price) {
-    this.addSodaName = name;
-    this.addSodaSize = size;
-    this.addSodaPrice = price;
+    if (addToppings("Mayo"))addMayo(); else removeMayo();
 
   }
 
-  public double itemizedBurger() {
-    double plainBurgerPrice = this.price;
-    double totalBurgerPrice = plainBurgerPrice;
-
-    System.out.println(this.name + " Burger" + " on a " + this.breadRollType + " roll " + "with " + this.meat + ": $" + plainBurgerPrice);
-    if (this.addToppingName1 != null) {
-      totalBurgerPrice += this.addToppingPrice1;
-      System.out.println("Added " + this.addToppingName1 + " for an extra $" + this.addToppingPrice1);
+  protected boolean addToppings(String toppings){
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Would you like to add " + toppings + "?");
+    System.out.println("Enter 'y' to add " + toppings + ", press any other key to not add.");
+    char ch = scanner.next().charAt(0);
+    if (ch == 'n'||ch =='N') {
+      return false;
     }
-
-    if (this.addToppingName2 != null) {
-      totalBurgerPrice += this.addToppingPrice2;
-      System.out.println("Added " + this.addToppingName2 + " for an extra $" + this.addToppingPrice2);
+    if (ch == 'y'||ch =='Y') {
+      return true;
     }
-
-    if (this.addFriesSize != null) {
-      totalBurgerPrice += this.addFriesPrice;
-      System.out.println("Added a size " + this.addFriesSize + " fry for an extra $" + this.addFriesPrice);
-    }
-
-    if (this.addSodaName != null) {
-      totalBurgerPrice += this.addSodaPrice;
-      System.out.println("Added a size " + this.addSodaSize + " " + this.addSodaName + " for an extra $" + this.addSodaPrice);
-    }
-
-    if (this.addCheeseName != null) {
-      totalBurgerPrice += this.addCheesePrice;
-      System.out.println("Added " + this.addCheeseName + " cheese for an extra $" + this.addCheesePrice);
-    }
-
-    if (this.addBaconName != null) {
-      totalBurgerPrice += this.addBaconPrice;
-      System.out.println("Added " + this.addBaconName + " bacon for an extra $" + this.addBaconPrice);
-    }
-
-    return totalBurgerPrice;
+    return false;
   }
+
 }

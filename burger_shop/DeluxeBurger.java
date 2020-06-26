@@ -1,88 +1,70 @@
 package burger_shop;
 
 public class DeluxeBurger extends Burger {
-
-  private String deluxeToppingName3;
-  private double deluxeToppingPrice3;
-
-  private String deluxeToppingName4;
-  private double deluxeToppingPrice4;
-
-  private String deluxeToppingName5;
-  private double deluxeToppingPrice5;
-
-  private String deluxeToppingName6;
-  private double deluxeToppingPrice6;
-
-  public void addDeluxeTopping3(String name, double price) {  //EXTRA 4 TOPPINGS ALLOWED FOR DELUXE BURGER TO MAKE 6 TOTAL
-    this.deluxeToppingName3 = name;
-    this.deluxeToppingPrice3 = price;
+  public boolean swissCheese,dijonMustard, mushrooms, peppers, bbqSauce, friedEgg;
+  public DeluxeBurger(String name,String bread, String meat,double burgerPrice){
+    super(name,bread,meat,burgerPrice);
+    bbqSauce = false; //SIX TOPPINGS ALLOWED FOR DELUXE BURGER CLASS
+    friedEgg = false;   //SIX TOPPINGS ALLOWED FOR DELUXE BURGER CLASS
+    swissCheese = false;    //SIX TOPPINGS ALLOWED FOR DELUXE BURGER CLASS
+    dijonMustard = false;   //SIX TOPPINGS ALLOWED FOR DELUXE BURGER CLASS
+    mushrooms = false; //SIX TOPPINGS ALLOWED FOR DELUXE BURGER CLASS
+    peppers = false;   //SIX TOPPINGS ALLOWED FOR DELUXE BURGER CLASS
 
   }
-
-  public void addDeluxeTopping4(String name, double price) { //EXTRA 4 TOPPINGS ALLOWED FOR DELUXE BURGER TO MAKE 6 TOTAL
-    this.deluxeToppingName4 = name;
-    this.deluxeToppingPrice4 = price;
-
+  public void addBbqSauce(){
+    bbqSauce = true;
   }
-
-  public void addDeluxeTopping5(String name, double price) {  //EXTRA 4 TOPPINGS ALLOWED FOR DELUXE BURGER TO MAKE 6 TOTAL
-    this.deluxeToppingName5 = name;
-    this.deluxeToppingPrice5 = price;
-
+  public void addFriedEgg(){
+    friedEgg = true;
   }
-
-  public void addDeluxeTopping6(String name, double price) { //EXTRA 4 TOPPINGS ALLOWED FOR DELUXE BURGER TO MAKE 6 TOTAL
-    this.deluxeToppingName6 = name;
-    this.deluxeToppingPrice6 = price;
-
+  public void addSwissCheese(){
+    swissCheese = true;
   }
-
-
-  @Override
-  public void addSoda(String name, String size, double price) {
-    System.out.println("Cannot add additional drinks for the Deluxe Burger");
+  public void addDijonMustard(){
+    dijonMustard = true;
   }
-
-  @Override
-  public void addFries(String size, double price) {
-    System.out.println("Cannot add additional sides for the Deluxe Burger");
+  public void addMushrooms(){
+    mushrooms = true;
   }
-
-  @Override
-  public void addBacon(String name, double price) {
-    System.out.println("Your Deluxe Burger already comes with bacon!");
+  public void addPeppers(){
+    peppers = true;
+  }
+  public void removeBbqSauce(){
+    bbqSauce = false;
+  }
+  public void removeFriedEgg(){
+    friedEgg = false;
+  }
+  public void removeSwissCheese(){
+    swissCheese = false;
+  }
+  public void removeDijonMustard(){
+    dijonMustard = false;
+  }
+  public void removeMushrooms(){
+    mushrooms = false;
+  }
+  public void removePeppers(){
+    peppers = false;
   }
 
   @Override
-  public double itemizedBurger() {
-    double totalBurgerPrice = super.itemizedBurger();
-    if(this.deluxeToppingName3 != null) {
-      totalBurgerPrice += this.deluxeToppingPrice3;
-      System.out.println("Added " + this.deluxeToppingName3 + " for an extra " + this.deluxeToppingPrice3);
-    }
-
-    if(this.deluxeToppingName4 != null) {
-      totalBurgerPrice += this.deluxeToppingPrice4;
-      System.out.println("Added " + this.deluxeToppingName4 + " for an extra " + this.deluxeToppingPrice4);
-    }
-    if(this.deluxeToppingName5 != null) {
-      totalBurgerPrice += this.deluxeToppingPrice5;
-      System.out.println("Added " + this.deluxeToppingName5 + " for an extra " + this.deluxeToppingPrice5);
-    }
-
-    if(this.deluxeToppingName4 != null) {
-      totalBurgerPrice += this.deluxeToppingPrice6;
-      System.out.println("Added " + this.deluxeToppingName6 + " for an extra " + this.deluxeToppingPrice6);
-    }
-
-    return totalBurgerPrice;
+  public double burgerPrice(){
+    return super.burgerPrice() + (((swissCheese?1d:0d) *.5d) + ((bbqSauce?1d:0d) *.25d) + ((dijonMustard?1d:0d) *1d) + ((mushrooms?1d:0d) *.75d) + ((peppers?1d:0d) *.60d)+ ((friedEgg?1d:0d) *1.5d));
   }
 
-  public DeluxeBurger() {
-    super("Deluxe", "Kobe Beef", 14.50, "white");
-    super.addFries("L", 0.00);
-    super.addSoda("Dr. Pepper", "L", 0.00);
-    super.addBacon("Applewood", 0.00);
+
+  public void variableToppings(){
+
+    if(addToppings("Swiss Cheese"))addSwissCheese();else removeSwissCheese();
+    if(addToppings("BBQ Sauce"))addBbqSauce();else removeBbqSauce();
+    if(addToppings("Dijon Mustard"))addDijonMustard();else removeDijonMustard();
+    if(addToppings("Portobello Mushrooms"))addMushrooms();else removeMushrooms();
+    if(addToppings("Chopped Red & Green Peppers"))addPeppers();else removePeppers();
+    if(addToppings("Fried Egg"))addFriedEgg();else removeFriedEgg();
+
   }
+
 }
+

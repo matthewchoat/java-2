@@ -1,5 +1,11 @@
 package burger_shop;
 
 public class Bread {
-    String bread = "rye";
+    private String name;
+
+    public Bread(String name){
+        this.name = name;
+    }
+
+
 }
