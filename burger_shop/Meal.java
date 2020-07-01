@@ -1,70 +1,60 @@
 package burger_shop;
 
-import java.awt.*;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
-public class Meal {
-    private Burger Burger;
-    private Side Side;
-    private Drink Drink;
-    private Boolean cheese, mayo;
-    public Meal(String name,String bread,String meat, Double burgerPrice, String sideName, String sideSize, Double sidePrice, String drinkName, String drinkSize, Double drinkPrice) {
-      Burger = new Burger(name, bread, meat, burgerPrice); //establishing a "has a" relationship with Burger.
-      Side = new Side(sideName, sideSize, sidePrice); //establish a "has a" relationship with Side.
-      Drink = new Drink(drinkName, drinkSize, drinkPrice); //establish a "has a" relationship with Drink.
-      this.cheese = false;
-      this.mayo = false;
+public class Meal implements MenuItem{
+    private Burger burger; //Limited to one burger per meal
+    private ArrayList<Side> sides = new ArrayList<>(); //Limited to THREE sides per meal
+    private Drink drink; //Limited to one drink per meal
+    private int comboNumber = 1;
+
+  public Meal(Burger burger, Drink drink, Side side) {
+    this.burger = burger;
+    this.sides.add(side);
+    this.drink = drink;
+
+  }
+
+    public void setBurger(Burger burger){ this.burger = burger; }
+
+    public void addSide(Side side) throws Exception {
+    for(Side s: sides) { //Prevented from adding multiples of the same item to a meal.
+      if (s.getName().equals(side.getName())) throw new Exception("Cannot add more than one of the same item to a combo.");
+      }
+
+      if (sides.size() < 3) { //Limited to THREE sides per meal
+
+        this.sides.add(side);
+      }
+      else throw new Exception("Cannot add more than 3 sides");
     }
 
-    public void addMayo(){
-      mayo = true;
-    }
-    public void addCheese(){
-      cheese = true;
+    public void setDrink(Drink drink) {
+      this.drink = drink;
     }
 
-    public void removeMayo(){
-      mayo = false;
-    }
-    public void removeCheese(){
-      cheese = false;
+    public String getName(){ return burger.getName() +" with " + getSideNames() + " and a " + drink.getName(); }
+    public double getPrice(){ return burger.getPrice() + getSidePrice() + drink.getPrice() ; }
+
+    protected double getSidePrice(){
+      return sides.stream().map(side -> side.getPrice()).reduce(0d,(total,price) -> total + price);
     }
 
-    public double burgerPrice(){
-      return Burger.burgerPrice() + Side.sidePrice() + Drink.getDrinkPrice() + ((cheese?1:0) * .5d) + ((mayo?1:0) * .25d);
+    protected String getSideNames(){
+      return sides.stream().map(side -> side.getName()).collect(Collectors.joining(", "));
     }
 
     public Burger getBurger(){
-      return Burger;
+      return burger;
     }
 
-    public String getName(){
-      return  Burger.getName();
-    }
-
-    public Side getSide(){
-      return Side;
+    public ArrayList<Side> getSide(){
+      return this.sides;
     }
 
     public Drink getDrink(){
-      return Drink;
+      return drink;
     }
 
-  protected boolean addToppings(String toppings){
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("Would you like to add " + toppings + "?");
-    System.out.println("Enter 'y' to add " + toppings + ", press any other key to not add.");
-    char ch = scanner.next().charAt(0);
-    if (ch == 'y'||ch =='Y') {
-      return true;
-    }
-    return false;
-  }
-
-    public void variableToppings(){
-      if(addToppings("Cheese")){addCheese();}else removeCheese();
-
-      if (addToppings("Mayo"))addMayo(); else removeMayo();
-
-    }
   }

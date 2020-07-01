@@ -1,63 +1,42 @@
 package burger_shop;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Burger {
-  private String name;
-  private String bread,meat;
-  private double burgerPrice;
-  private boolean cheese,mayo;
+public class Burger implements MenuItem {
+  private String name = "Plain Burger";
+  private Bread bread = new Bread("white");
+  private Meat meat = new Meat("Grass-fed Beef");
+  private double burgerPrice = 6.99d;
+  private ArrayList<Toppings> toppings = new ArrayList<>();
 
-  public Burger(String name,String bread,String meat,double burgerPrice){
-    this.name = name;
-    this.bread = bread;
-    this.meat = meat;
-    this.burgerPrice = burgerPrice;
-    this.cheese = false; //ONLY TWO TOPPINGS ALLOWED FOR PLAIN BURGER CLASS
-    this.mayo = false;   //ONLY TWO TOPPINGS ALLOWED FOR PLAIN BURGER CLASS
-  }
-  
-  public void addMayo(){
-    mayo = true;
-  }
-  public void addCheese(){
-    cheese = true;
-  }
+  public Burger(){ }
 
-  public void removeMayo(){
-    mayo = false;
-  }
-  public void removeCheese(){
-    cheese = false;
-  }
+  public void setName(String name) { this.name = name; }
+  public void setBread(Bread bread) { this.bread = bread; }
+  public void setMeat(Meat meat) { this.meat = meat; }
+  public void setPrice(double price) { this.burgerPrice = price; }
+  public void setToppings(ArrayList<Toppings> toppings) { this.toppings = toppings; }
 
-  public double burgerPrice(){ //calculating total burger price with toppings
-    return burgerPrice + (cheese?1:0) * .5d + (mayo?1:0) * .25d;
-  }
+  public String getName(){ return  name; }
+  public Bread getBread() { return bread; }
+  public Meat getMeat() { return meat; }
+  public double getPrice(){
+    double priceTotal = getToppings().stream().map(topping -> topping.getToppingPrice()).reduce(0d, (accum, amount) -> accum + amount );
+    return burgerPrice + priceTotal; }
+  public ArrayList<Toppings> getToppings() { return toppings; }
 
-  public String getName(){
-    return  name;
-  }
 
-  public void variableToppings(){
-    if(addToppings("Cheese")){addCheese();}else removeCheese();
-
-    if (addToppings("Mayo"))addMayo(); else removeMayo();
-
-  }
-
-  protected boolean addToppings(String toppings){
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("Would you like to add " + toppings + "?");
-    System.out.println("Enter 'y' to add " + toppings + ", press any other key to not add.");
-    char ch = scanner.next().charAt(0);
-    if (ch == 'n'||ch =='N') {
-      return false;
+  public void addToppings(Toppings topping) throws Exception {
+    for(Toppings t: toppings){
+      if (t.getToppingName().equals(topping.getToppingName())) throw new Exception("Cannot add the same topping twice.");
     }
-    if (ch == 'y'||ch =='Y') {
-      return true;
+    if (this.toppings.size() + 1 <= 2) { //Limited to TWO toppings max per plain burger
+      this.toppings.add(topping);
     }
-    return false;
+    else throw new Exception("Cannot add more than 2 toppings to a Plain Burger");
+
+
   }
 
 }
