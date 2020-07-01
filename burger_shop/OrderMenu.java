@@ -104,7 +104,7 @@ public class OrderMenu {
             side);
   }
 
-  public Meal getDxMealExSides(){
+  private Meal getDxMealExSides(){
     Meal dxMealExSide = getDeluxeMeal();
     try {
       dxMealExSide.addSide(getMixVeggie());
@@ -120,11 +120,11 @@ public class OrderMenu {
   }
 
   //PLAIN BURGERS - Default is plain Beef
-  public Burger getPlainBurger(){
+  private Burger getPlainBurger(){
     return new Burger();
   }
 
-  public Burger getChickenBurger(){
+  private Burger getChickenBurger(){
     Burger chickenBurger = getPlainBurger();
     chickenBurger.setName("Chicken Burger");
     chickenBurger.setMeat(new Meat("Grilled Chicken Breast"));
@@ -133,11 +133,11 @@ public class OrderMenu {
   }
 
 //DELUXE BURGERS - Default is Kobe Beef Deluxe
-  public DeluxeBurger getDeluxeBurger(){
+  private DeluxeBurger getDeluxeBurger(){
     return new DeluxeBurger();
   }
 
-  public DeluxeBurger getBisonDeluxe(){
+  private DeluxeBurger getBisonDeluxe(){
     DeluxeBurger bisonDeluxe = getDeluxeBurger();
     bisonDeluxe.setName("Deluxe Bison Burger");
     bisonDeluxe.setMeat(new Meat("100% Bison"));
@@ -146,11 +146,11 @@ public class OrderMenu {
   }
 
   //HEALTHY BURGERS - Default HB is Organic Grass-fed Beef
-  public HealthBurger getHealthBurger(){
+  private HealthBurger getHealthBurger(){
     return new HealthBurger();
   }
 
-  public HealthBurger getBlackBeanQuinoa(){
+  private HealthBurger getBlackBeanQuinoa(){
     HealthBurger blackBeanQuinoa = getHealthBurger();
     blackBeanQuinoa.setName("Black Bean Quinoa Burger");
     blackBeanQuinoa.setMeat(new Meat("Black Bean & Quinoa"));
@@ -159,9 +159,9 @@ public class OrderMenu {
   }
 
   //SIDES - Default side is medium French Fries
-  public Side getSide(){ return new Side(); }
+  private Side getSide(){ return new Side(); }
 
-  public Side getSweetPotatoFries() {
+  private Side getSweetPotatoFries() {
     Side sweetPotatoFries = getSide();
     sweetPotatoFries.setName("Sweet Potato Fries");
     sweetPotatoFries.setSize("Medium");
@@ -169,7 +169,7 @@ public class OrderMenu {
     return sweetPotatoFries;
   }
 
-  public Side getSideSalad(){
+  private Side getSideSalad(){
     Side sideSalad = getSide();
     sideSalad.setName("Garden Side Salad");
     sideSalad.setSize("Small");
@@ -177,7 +177,7 @@ public class OrderMenu {
     return sideSalad;
   }
 
-  public Side getGreenBeans(){
+  private Side getGreenBeans(){
     Side greenBeans = getSide();
     greenBeans.setName("Steamed Green Beans");
     greenBeans.setSize("Medium");
@@ -185,7 +185,7 @@ public class OrderMenu {
     return greenBeans;
   }
 
-  public Side getMixVeggie(){
+  private Side getMixVeggie(){
     Side mixVeggie = getSide();
     mixVeggie.setName("Steamed Veggie Mix");
     mixVeggie.setSize("Medium");
@@ -193,7 +193,7 @@ public class OrderMenu {
     return mixVeggie;
   }
 
-  public Side getCarrotSticks(){
+  private Side getCarrotSticks(){
     Side carrotSticks = getSide();
     carrotSticks.setName("Fresh Carrot Sticks");
     carrotSticks.setSize("Small");
@@ -203,9 +203,9 @@ public class OrderMenu {
 
   //DRINKS - Default drink is Medium Coke
 
-  public Drink getDrink(){ return new Drink(); }
+  private Drink getDrink(){ return new Drink(); }
 
-  public Drink getDrPepper(){
+  private Drink getDrPepper(){
     Drink drPepper = getDrink();
     drPepper.setName("Dr. Pepper");
     drPepper.setSize("Medium");
@@ -213,7 +213,7 @@ public class OrderMenu {
     return drPepper;
   }
 
-  public Drink getIcedTea(){
+  private Drink getIcedTea(){
     Drink icedTea = getDrink();
     icedTea.setName("Iced Tea");
     icedTea.setSize("Medium");
@@ -221,7 +221,7 @@ public class OrderMenu {
     return icedTea;
   }
 
-  public Drink getWater(){
+  private Drink getWater(){
     Drink water = getDrink();
     water.setName("Water");
     water.setSize("Small");
@@ -231,7 +231,7 @@ public class OrderMenu {
 
   //toppings
 
-  public Burger addToppings(Burger burger, Toppings ... toppings) {
+  private Burger addToppings(Burger burger, Toppings ... toppings) {
     for(Toppings t : toppings) {
       try{
       burger.addToppings(t);
@@ -240,28 +240,28 @@ public class OrderMenu {
     return burger;
   }
 
-  public Burger addCondiments(Burger burger, ToppingsCondiments condiment){
+  private Burger addCondiments(Burger burger, ToppingsCondiments condiment){
     try{
     burger.addToppings(condiment);
     } catch(Exception e){System.out.println(e.getMessage());}
     return burger;
   }
 
-  public Burger addCheese(Burger burger, ToppingsCheese cheese){
+  private Burger addCheese(Burger burger, ToppingsCheese cheese){
     try{
     burger.addToppings(cheese);
     } catch(Exception e){System.out.println(e.getMessage());}
     return burger;
   }
 
-  public Burger addMeat(Burger burger, ToppingsMeat meat){
+  private Burger addMeat(Burger burger, ToppingsMeat meat){
     try{
     burger.addToppings(meat);
     } catch(Exception e){System.out.println(e.getMessage());}
     return burger;
   }
 
-  public Burger addVeggie(Burger burger, ToppingsVeggie veggie){
+  private Burger addVeggie(Burger burger, ToppingsVeggie veggie){
     try{
     burger.addToppings(veggie);
     } catch(Exception e){System.out.println(e.getMessage());}
@@ -550,7 +550,5 @@ public class OrderMenu {
 
     return toppingsMenu;
   }
-
-
 
 }
