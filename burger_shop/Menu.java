@@ -4,9 +4,9 @@ package burger_shop;
 
 import java.util.ArrayList;
 
-public class OrderMenu {
+public class Menu {
 
-  public OrderMenu() {}
+  public Menu() {}
 
   //MEALS
   private Meal getPlainMeal(){
@@ -304,75 +304,75 @@ public class OrderMenu {
     }
 
     if(itemName.equals( getPlainMeal().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getPlainMeal().getName() + "...");
+      System.out.println("Now preparing your Combo Meal: " + getPlainMeal().getName() + "...");
       return getPlainMeal();
     }
     if (itemName.equals( getHealthyMeal().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getHealthyMeal().getName() + "...");
+      System.out.println("Now preparing your Combo Meal: " + getHealthyMeal().getName() + "...");
       return  getHealthyMeal();
 
     }
     if (itemName.equals( getDxMealExSides().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getDxMealExSides().getName() + "...");
+      System.out.println("Now preparing your Combo Meal with 3 sides: " + getDxMealExSides().getName() + "...");
       return  getDxMealExSides();
     }
 
     if (itemName.equals( getSide().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getSide().getName() + "...");
+      System.out.println("Now preparing your " + getSide().getSize() + " " + getSide().getName() + "...");
       return  getSide();
 
     }
     if (itemName.equals( getSweetPotatoFries().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getSweetPotatoFries().getName() + "...");
+      System.out.println("Now preparing your " + getSweetPotatoFries().getSize() + " " + getSweetPotatoFries().getName() + "...");
       return  getSweetPotatoFries();
 
     }
     if (itemName.equals( getSideSalad().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getSideSalad().getName() + "...");
+      System.out.println("Now preparing your " + getSideSalad().getSize() + " " + getSideSalad().getName() + "...");
       return  getSideSalad();
 
     }
     if (itemName.equals( getGreenBeans().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getGreenBeans().getName() + "...");
+      System.out.println("Now preparing your " + getGreenBeans().getSize() + " " + getGreenBeans().getName() + "...");
 
       return  getGreenBeans();
 
     }
     if (itemName.equals( getMixVeggie().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getMixVeggie().getName() + "...");
+      System.out.println("Now preparing your " + getMixVeggie().getSize() + " " + getMixVeggie().getName() + "...");
 
       return  getMixVeggie();
 
     }
     if (itemName.equals( getCarrotSticks().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getCarrotSticks().getName() + "...");
+      System.out.println("Now preparing your " + getCarrotSticks().getSize() + " " + getCarrotSticks().getName() + "...");
 
       return  getCarrotSticks();
 
     }
     if (itemName.equals( getDrink().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getDrink().getName() + "...");
+      System.out.println("Now preparing your " + getDrink().getSize() + " " + getDrink().getName() + "...");
 
       return  getDrink();
 
     }
     if (itemName.equals( getDrPepper().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getDrPepper().getName() + "...");
+      System.out.println("Now preparing your " + getDrPepper().getSize() + " " + getDrPepper().getName() + "...");
       return  getDrPepper();
 
     }
     if (itemName.equals( getIcedTea().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getIcedTea().getName() + "...");
+      System.out.println("Now preparing your " + getIcedTea().getSize() + " " + getIcedTea().getName() + "...");
       return  getIcedTea();
 
     }
     if (itemName.equals( getWater().getName().toLowerCase())) {
-      System.out.println("Now preparing your " + getWater().getName() + "...");
+      System.out.println("Now preparing your " + getWater().getSize() + " " + getWater().getName() + "...");
       return  getWater();
 
     }
     else {
-        System.out.println("Now preparing your " + getHealthyMeal().getName() + "...");
+        System.out.println("Now preparing your Combo Meal: " + getHealthyMeal().getName() + "...");
         return  getHealthyMeal();
 
       }
@@ -401,7 +401,7 @@ public class OrderMenu {
         || itemName.equals(getWater().getName().toLowerCase());
   }
 
-  public Toppings inToppingsMenu(String toppingName){
+  public Toppings inToppingsMenu(String toppingName){ //This list accepts the only valid toppings, cheese and meet not allowed for healthy burgers
     toppingName = toppingName.toLowerCase();
     switch(toppingName) {
       case "1":
@@ -464,7 +464,7 @@ public class OrderMenu {
 
   public ArrayList<String> printMenu(){
     ArrayList<String> menu = new ArrayList<>();
-    OrderMenu dispMenu = new OrderMenu();
+    Menu dispMenu = new Menu();
     menu.add("Please browse our menu :");
     menu.add("Burger Name  " + "\t||\t" +"base price" );
 
@@ -511,7 +511,7 @@ public class OrderMenu {
 
   public ArrayList<String> printToppings(){
     ArrayList<String> toppingsMenu = new ArrayList<>();
-    OrderMenu dispToppings = new OrderMenu();
+    Menu dispToppings = new Menu();
     toppingsMenu.add("**********Available Toppings************");
     toppingsMenu.add("Topping Name  " + "\t||\t" +"base price" );
 

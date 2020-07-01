@@ -7,7 +7,6 @@ public class ToppingsCondiments extends Toppings {
 
   @Override
   public void setToppingAmount(int toppingAmount) throws Exception {
-    System.out.println(toppingAmount);
     if(toppingAmount <= 3 ) {
       super.setToppingAmount(toppingAmount);
     }
